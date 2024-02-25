@@ -108,7 +108,7 @@ def sell_stock(ticker: str, amount: int) -> int:
     return "\nObservation: {} shares of {} is SOLD. ACTION COMPLETED\n".format(amount, ticker)
 
 @tool
-def estimate_future_profit(ticker, shares, mean_frame, backtest_frame, investment_period=1):
+def mean_reversion(ticker, shares, mean_frame, backtest_frame, investment_period=1):
     """
     Estimate future profit based on historical performance of a mean reversion strategy.
 
@@ -192,9 +192,9 @@ def estimate_future_profit(ticker, shares, mean_frame, backtest_frame, investmen
     backtest_data.to_csv(csv_filename)
     print(f"Backtest data exported to {csv_filename}")
     
-# Example usage
-ticker = input('Enter stock ticker: ')
-shares = int(input('Number of shares to buy: '))
-mean_frame = int(input('Enter time frame for mean: '))
-backtest_frame = int(input('Enter time frame for backtest: '))
-estimate_future_profit(ticker, shares, mean_frame, backtest_frame)
+# # Example usage
+# ticker = input('Enter stock ticker: ')
+# shares = int(input('Number of shares to buy: '))
+# mean_frame = int(input('Enter time frame for mean: '))
+# backtest_frame = int(input('Enter time frame for backtest: '))
+# estimate_future_profit(ticker, shares, mean_frame, backtest_frame)

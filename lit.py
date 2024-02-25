@@ -6,7 +6,7 @@ import streamlit as st
 from langchain import hub
 from langchain.agents import AgentExecutor, Tool, create_react_agent
 from langchain_community.callbacks import StreamlitCallbackHandler
-from langchain_community.utilities import DuckDuckGoSearchAPIWrapper, SQLDatabase
+# from langchain_community.utilities import DuckDuckGoSearchAPIWrapper, SQLDatabase
 from langchain_community.chat_message_histories import StreamlitChatMessageHistory
 from langchain_core.runnables import RunnableConfig
 from sqlalchemy import create_engine
@@ -21,7 +21,7 @@ from langchain.agents import ConversationalChatAgent, AgentExecutor
 from langchain.memory import ConversationBufferMemory
 from langchain_community.callbacks import StreamlitCallbackHandler
 from langchain_community.chat_message_histories import StreamlitChatMessageHistory
-from langchain_community.tools import DuckDuckGoSearchRun
+# from langchain_community.tools import DuckDuckGoSearchRun
 from langchain_core.runnables import RunnableConfig
 from langchain_openai import ChatOpenAI
 
@@ -50,24 +50,23 @@ for idx, msg in enumerate(msgs.messages):
 if prompt := st.chat_input(placeholder="Can you run the mean reversion algorithm on 10 shares MSFT?"):
     st.chat_message("user").write(prompt)
 
-    if not openai_api_key:
-        st.info("Please add your OpenAI API key to continue.")
-        st.stop()
+    # llm = ChatOpenAI(model_name="gpt-3.5-turbo", openai_api_key=openai_api_key, streaming=True)
+    # tools = [DuckDuckGoSearchRun(name="Search")]
+    # chat_agent = ConversationalChatAgent.from_llm_and_tools(llm=llm, tools=tools)
+    # executor = AgentExecutor.from_agent_and_tools(
+    #     agent=chat_agent,
+    #     tools=tools,
+    #     memory=memory,
+    #     return_intermediate_steps=True,
+    #     handle_parsing_errors=True,
+    # )
+    executor  = chatagent()
 
-    llm = ChatOpenAI(model_name="gpt-3.5-turbo", openai_api_key=openai_api_key, streaming=True)
-    tools = [DuckDuckGoSearchRun(name="Search")]
-    chat_agent = ConversationalChatAgent.from_llm_and_tools(llm=llm, tools=tools)
-    executor = AgentExecutor.from_agent_and_tools(
-        agent=chat_agent,
-        tools=tools,
-        memory=memory,
-        return_intermediate_steps=True,
-        handle_parsing_errors=True,
-    )
     with st.chat_message("assistant"):
         st_cb = StreamlitCallbackHandler(st.container(), expand_new_thoughts=False)
         cfg = RunnableConfig()
         cfg["callbacks"] = [st_cb]
-        response = executor.invoke(prompt, cfg)
+        # response = executor.invoke(prompt, cfg)
+        response = executor.query(prompt, cfg)
         st.write(response["output"])
-        st.session_state.steps[str(len(msgs.messages) - 1)] = response["intermediate_steps"]
+        # st.session_state.steps[str(len(msgs.messages) - 1)] = response["intermediate_steps"]
