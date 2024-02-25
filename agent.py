@@ -47,5 +47,5 @@ class chatagent():
             return_intermediate_steps=True
         )
 
-        response = agent_executor.invoke({"input": message}, cfg)
+        response = agent_executor.invoke({"input": message}, cfg, chat_history = [])
         return response
