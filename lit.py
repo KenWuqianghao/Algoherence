@@ -10,7 +10,6 @@ import pandas as pd
 import numpy as np
 import glob
 import warnings
-import random
 warnings.filterwarnings("ignore")
 
 load_dotenv()
@@ -41,13 +40,12 @@ for idx, msg in enumerate(msgs.messages):
                 st.write(step[1])
         st.write(msg.content)
 
-placeholders = ["Buy 10 shares of MSFT", "Sell 10 shares of TSLA", "Can you run mean reversion on 10 shares of MSFT with mean frame of 20, backtest frame of 365, and investment period of 1", "What is alpha in stock investing?", "Can you buy 10 shares of a stock that has low alpha value?"]
-if prompt := st.chat_input(placeholder=random.choice(placeholders)):
-    st.chat_message("user").write(prompt)
+if prompt := st.chat_input(placeholder="Can you buy 10 shares of a stock that has low alpha value?"):
+    st.chat_message("🗿").write(prompt)
 
     executor  = chatagent()
 
-    with st.chat_message("assistant"):
+    with st.chat_message("🍮"):
         st_cb = StreamlitCallbackHandler(st.container(), expand_new_thoughts=False)
         cfg = RunnableConfig()
         cfg["callbacks"] = [st_cb]
