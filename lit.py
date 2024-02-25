@@ -10,6 +10,9 @@ from langchain.memory import ConversationBufferMemory
 from langchain_community.callbacks import StreamlitCallbackHandler
 from langchain_community.chat_message_histories import StreamlitChatMessageHistory
 from langchain_core.runnables import RunnableConfig
+import pandas as pd
+import numpy as np
+import glob
 import warnings
 warnings.filterwarnings("ignore")
 
@@ -52,3 +55,18 @@ if prompt := st.chat_input(placeholder="Can you run the mean reversion algorithm
         response = executor.query(prompt, cfg, memory)
         st.write(response["output"])
         st.session_state.steps[str(len(msgs.messages) - 1)] = response["intermediate_steps"]
+        if not len(os.listdir('./graph')) == 0:
+            print("Graph directory is not empty")
+            image_file_path = glob.glob("./graph/*")[0]
+            st.image(glob.glob(image_file_path))
+            os.remove(image_file_path)
+        else:
+            print("Graph directory is empty")
+        if not len(os.listdir('./table')) == 0:
+            print("Table directory is not empty")
+            csv_file_path = glob.glob("./table/*")[0]
+            df = pd.read_csv(csv_file_path)
+            st.dataframe(df)
+            os.remove(csv_file_path)
+        else:
+            print("Table directory is empty")
