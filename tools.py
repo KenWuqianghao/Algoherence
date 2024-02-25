@@ -108,15 +108,15 @@ def sell_stock(ticker: str, amount: int) -> int:
     return "\nObservation: {} shares of {} is SOLD. ACTION COMPLETED\n".format(amount, ticker)
 
 @tool
-def mean_reversion(ticker, shares, mean_frame, backtest_frame, investment_period=1):
+def mean_reversion(ticker: str, shares: int, mean_frame: int = 20, backtest_frame: int = 365, investment_period:int = 1):
     """
-    Estimate future profit based on historical performance of a mean reversion strategy.
+    Mean reversion strategy
 
     Args:
     ticker (str): Stock ticker symbol.
     shares (int): Number of shares to buy.
-    mean_frame (int): Time frame for calculating the mean.
-    backtest_frame (int): Time frame for backtesting.
+    mean_frame (int): Time frame for calculating the mean. Default is 20 days.
+    backtest_frame (int): Time frame for backtesting. Default is 365 days.
     investment_period (int): Future investment period in years for profit estimation. Default is 1 year.
     """
     # Fetch historical data
@@ -162,7 +162,6 @@ def mean_reversion(ticker, shares, mean_frame, backtest_frame, investment_period
     plt.legend()
     plt.grid(True)
     
-    
     graph_dir = 'graph'
     # Ensure the 'graph' directory exists
     graph_dir = 'graph'
@@ -185,13 +184,12 @@ def mean_reversion(ticker, shares, mean_frame, backtest_frame, investment_period
     estimated_annual_profit = annual_return * shares * stock_data['Close'].iloc[-1]  # Estimate based on the last closing price
     estimated_future_profit = estimated_annual_profit * investment_period
 
-    print(f"Estimated future profit for {ticker} over {investment_period} year(s) with {shares} shares: ${estimated_future_profit:.2f}")
-
     # Export the backtest data to CSV
     csv_filename = f"{table_dir}/{ticker}_mean_reversion_backtest.csv"
     backtest_data.to_csv(csv_filename)
-    print(f"Backtest data exported to {csv_filename}")
     
+    return(f"\nObservation: Estimated future profit for {ticker} over {investment_period} year(s) with {shares} shares: ${estimated_future_profit:.2f}\n")
+
 # # Example usage
 # ticker = input('Enter stock ticker: ')
 # shares = int(input('Number of shares to buy: '))
