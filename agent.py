@@ -45,5 +45,5 @@ class chatagent():
             handle_parsing_errors=True
         )
 
-        response = agent_executor.invoke({"input": message}, cfg)
+        response = agent_executor.invoke({"input": message}, cfg, chat_history = [])
         return response

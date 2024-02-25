@@ -9,6 +9,8 @@ from langchain.memory import ConversationBufferMemory
 from langchain_community.callbacks import StreamlitCallbackHandler
 from langchain_community.chat_message_histories import StreamlitChatMessageHistory
 from langchain_core.runnables import RunnableConfig
+import warnings
+warnings.filterwarnings("ignore")
 
 load_dotenv()
 
