@@ -29,7 +29,7 @@ if len(msgs.messages) == 0:
     msgs.add_ai_message("How can I help you?")
     st.session_state.steps = {}
 
-avatars = {"human": "user", "ai": "🍮"}
+avatars = {"human": "🗿", "ai": "🍮"}
 for idx, msg in enumerate(msgs.messages):
     with st.chat_message(avatars[msg.type]):
         # Render intermediate steps if any were saved
@@ -43,11 +43,11 @@ for idx, msg in enumerate(msgs.messages):
 
 placeholders = ["Buy 10 shares of MSFT", "Sell 10 shares of TSLA", "Can you run mean reversion on 10 shares of MSFT with mean frame of 20, backtest frame of 365, and investment period of 1", "What is alpha in stock investing?", "Can you buy 10 shares of a stock that has low alpha value?"]
 if prompt := st.chat_input(placeholder=random.choice(placeholders)):
-    st.chat_message("🗿").write(prompt)
+    st.chat_message("user").write(prompt)
 
     executor  = chatagent()
 
-    with st.chat_message("🍮"):
+    with st.chat_message("assistant"):
         st_cb = StreamlitCallbackHandler(st.container(), expand_new_thoughts=False)
         cfg = RunnableConfig()
         cfg["callbacks"] = [st_cb]
