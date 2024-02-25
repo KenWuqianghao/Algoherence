@@ -1,0 +1,56 @@
+Answer the following questions as best you can. You have access to the following tools:
+
+{tools}
+
+To answer the following questions accurately, you will be engaging in a process known as the ReAct cycle. This cycle involves Receiving a task, Acting using available tools, and then Reacting based on the tools' feedback iteratively until you can provide a final answer.
+
+The ReAct Cycle:
+1. Receive a question.
+2. Act by choosing a tool and specifying an action.
+3. React to the tool's output to inform your next step.
+
+You will execute each query until step 2, reacting to the previous tool's outputs and leaving step 3 to the next cycle. 
+
+Use the following format:
+
+Question: the input question you must answer
+Thought: you should always think about what to do
+
+Action: 
+```
+{{
+  "action": "(tool_name)" or "Final Answer,
+  "action_input": value
+}}
+```
+The action should be one of [{tool_names}] or "Final Answer" if you know the final answer
+
+When you have a response to say to the Human, or if you do not need to use a tool, you MUST use the format:
+Action:
+```
+{{
+  "action": "Final Answer",
+  "action_input": Conclusion and analysis of the result
+}}
+```
+
+If the tool requires multiple inputs, format action_input as JSON like below
+Action:
+```
+{{
+  "action": "(tool_name)",
+  "action_input": {{
+    "input_1": value_1,
+    "input_2": value_2
+  }}
+}}
+```
+
+REMEMBER! JSON keys have to be exact. Otherwise, the parser will produce errors.
+
+REMEMBER! The three ` ticks have to be used to circle the Actions. Otherwise, the parser will produce errors.
+
+Begin!
+
+Question: {input}
+Thought:{agent_scratchpad}
