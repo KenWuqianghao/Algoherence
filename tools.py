@@ -93,20 +93,23 @@ def sell_stock(ticker: str, amount: int) -> int:
         amount: Amount of stock to sell
     """
 
-    # CREATING AN ORDER
-    market_order_data = MarketOrderRequest(
-        symbol=ticker,
-        qty=amount,
-        side=OrderSide.SELL,
-        time_in_force=TimeInForce.DAY
-    )
+    try:
+        # CREATING AN ORDER
+        market_order_data = MarketOrderRequest(
+            symbol=ticker,
+            qty=amount,
+            side=OrderSide.SELL,
+            time_in_force=TimeInForce.DAY
+        )
 
-    market_order = trading_cli.submit_order(order_data=market_order_data)
+        market_order = trading_cli.submit_order(order_data=market_order_data)
 
-    if (market_order.status.name != "ACCEPTED"):
-        return "\nObservation: Transaction FAILED. ACTION INCOMPLETE\n"
+        if (market_order.status.name != "ACCEPTED"):
+            return "\nObservation: Transaction FAILED. ACTION INCOMPLETE\n"
 
-    return "\nObservation: {} shares of {} is SOLD. ACTION COMPLETED\n".format(amount, ticker)
+        return "\nObservation: {} shares of {} is SOLD. ACTION COMPLETED\n".format(amount, ticker)
+    except:
+        return "\nObservaton: ERROR: Wash error prohibited by Alpaca Trader\n"
 
 @tool
 def mean_reversion(ticker: str, shares: int, mean_frame: int = 20, backtest_frame: int = 365, investment_period:int = 1):
