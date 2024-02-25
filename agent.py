@@ -25,7 +25,7 @@ class chatagent():
     def __init__(self):
         return
     
-    def query(self, message: str, cfg) -> str:
+    def query(self, message: str, cfg, memory) -> str:
         cohere = ChatCohere(model="command", temperature = 0, streaming=True, verbose=True)
         tools = [buy_stock, sell_stock, mean_reversion, rag]
         prompt = hub.pull("kenwu/react-json")
@@ -41,8 +41,10 @@ class chatagent():
             agent=agent, 
             tools=tools,
             verbose=True,
+            memory=memory,
             max_iterations=5,
-            handle_parsing_errors=True
+            handle_parsing_errors=True,
+            return_intermediate_steps=True
         )
 
         response = agent_executor.invoke({"input": message}, cfg)
