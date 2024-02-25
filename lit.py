@@ -10,13 +10,14 @@ import pandas as pd
 import numpy as np
 import glob
 import warnings
+import random
 warnings.filterwarnings("ignore")
 
 load_dotenv()
 
 
 st.set_page_config(page_title="Algoherence", page_icon="🍮")
-st.title("Algoherence Chat")
+st.title("Algoherence - Empowering Financial Literacy for All")
 
 msgs = StreamlitChatMessageHistory()
 memory = ConversationBufferMemory(
@@ -40,12 +41,13 @@ for idx, msg in enumerate(msgs.messages):
                 st.write(step[1])
         st.write(msg.content)
 
-if prompt := st.chat_input(placeholder="Can you run the mean reversion algorithm on 10 shares MSFT?"):
-    st.chat_message("user").write(prompt)
+placeholders = ["Buy 10 shares of MSFT", "Sell 10 shares of TSLA", "Can you run mean reversion on 10 shares of MSFT with mean frame of 20, backtest frame of 365, and investment period of 1", "What is alpha in stock investing?", "Can you buy 10 shares of a stock that has low alpha value?"]
+if prompt := st.chat_input(placeholder=random.choice(placeholders)):
+    st.chat_message("🗿").write(prompt)
 
     executor  = chatagent()
 
-    with st.chat_message("assistant"):
+    with st.chat_message("🍮"):
         st_cb = StreamlitCallbackHandler(st.container(), expand_new_thoughts=False)
         cfg = RunnableConfig()
         cfg["callbacks"] = [st_cb]
