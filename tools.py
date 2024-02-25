@@ -40,7 +40,8 @@ trading_cli = TradingClient(ALPACA_KEY, ALPACA_SECRET_KEY, paper=True)
 @tool
 def rag(query: str):
     """
-    This function uses the RAG model to retrieve relevant documents for a given query
+    Dynamically provide relevant documents to improve Agent response when outside knowledge is required or useful. Essentially, useful for any non calculating queries.
+
     query: The query to search for in complete sentences
     """
     
@@ -113,14 +114,14 @@ def sell_stock(ticker: str, amount: int) -> int:
 @tool
 def mean_reversion(ticker: str, shares: int, mean_frame: int = 20, backtest_frame: int = 365, investment_period:int = 1):
     """
-    Mean reversion strategy
+    Emulates profit of a specific stock using z-score mean reversion strategy. Do NOT use this unless explicitly mentioned.
 
     Args:
-    ticker (str): Stock ticker symbol.
-    shares (int): Number of shares to buy.
-    mean_frame (int): Time frame for calculating the mean. Default is 20 days.
-    backtest_frame (int): Time frame for backtesting. Default is 365 days.
-    investment_period (int): Future investment period in years for profit estimation. Default is 1 year.
+    ticker: Stock ticker
+    shares: Number of shares to buy
+    mean_frame: Time frame for calculating the mean
+    backtest_frame: Time frame for backtesting
+    investment_period: Future investment period in years for profit estimation
     """
     # Fetch historical data
     start_date = '2018-08-01'
