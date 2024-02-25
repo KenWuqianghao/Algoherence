@@ -1,5 +1,5 @@
 # Algoherence: A Leap Towards Accessible Financial Literacy
-![Logo](https://github.com/KenWuqianghao/algoherence/assets/20444505/41def0ce-7fdf-47bc-b2ba-091867b3c7c4)
+![Logo](https://github.com/KenWuqianghao/algoherence/assets/20444505/f33a248e-4876-41fb-b62b-8bcb767ab5db)
 
 ## Inspiration
 In a world where financial literacy is a gateway to empowerment but remains inaccessible to many, our project, Algoherence, emerges as a beacon of hope. Our journey began with a simple yet powerful vision: to democratize access to advanced financial instruments and trading knowledge. Recognizing the barriers of complexity and resource scarcity faced by the underprivileged, we embarked on creating a tool that speaks the universal language of accessibility. Algoherence is the culmination of this vision, a stock trading chatbot designed to bridge the gap between complex financial products and those who stand to benefit from them the most.
