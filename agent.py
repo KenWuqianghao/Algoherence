@@ -21,19 +21,29 @@ langchain.verbose=True
 
 COHERE_API_KEY = os.environ["COHERE_API_KEY"]
 
-def agent():
-    cohere = ChatCohere(model="command", temperature = 0, streaming=True, verbose=True)
-    tools = [buy_stock, sell_stock, mean_reversion, rag]
-    prompt = hub.pull("kenwu/react-json")
+class chatagent():
+    def __init__(self):
+        return
     
-    # Create an agent executor by passing in the agent and tools
-    agent_executor = AgentExecutor(
-        agent=agent, 
-        tools=tools,
-        verbose=True,
-        max_iterations=5,
-        handle_parsing_errors=True
-    )
+    def query(self, message: str, cfg) -> str:
+        cohere = ChatCohere(model="command", temperature = 0, streaming=True, verbose=True)
+        tools = [buy_stock, sell_stock, mean_reversion, rag]
+        prompt = hub.pull("kenwu/react-json")
 
-    response = agent_executor.invoke({"input": "Can you run the mean reversion algorithm on 10 shares MSFT?\n"})
-    return response
+        agent = create_structured_chat_agent(
+            cohere,
+            tools,
+            prompt
+        )
+        
+        # Create an agent executor by passing in the agent and tools
+        agent_executor = AgentExecutor(
+            agent=agent, 
+            tools=tools,
+            verbose=True,
+            max_iterations=5,
+            handle_parsing_errors=True
+        )
+
+        response = agent_executor.invoke({"input": message}, cfg)
+        return response
