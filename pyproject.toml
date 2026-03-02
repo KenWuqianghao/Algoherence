@@ -1,0 +1,43 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "algoherence"
+version = "0.1.0"
+description = "A Leap Towards Accessible Financial Literacy"
+readme = "README.md"
+requires-python = ">=3.9"
+license = {text = "MIT"}
+dependencies = [
+    "langchain>=0.1.0",
+    "langchain-community>=0.0.24",
+    "langchain-core>=0.1.26",
+    "langchain-cohere>=0.1.0",
+    "langgraph>=0.0.26",
+    "alpaca-py>=0.16.0",
+    "yfinance>=0.2.36",
+    "streamlit>=1.31.1",
+    "pandas>=2.2.1",
+    "numpy>=1.26.4",
+    "matplotlib>=3.8.3",
+    "python-dotenv>=1.0.1",
+    "pydantic>=2.6.2",
+    "tavily-python>=0.3.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0.0",
+    "ruff>=0.3.0",
+    "mypy>=1.9.0",
+]
+
+[tool.ruff]
+line-length = 88
+target-version = "py39"
+
+[tool.mypy]
+python_version = "3.9"
+warn_return_any = true
+warn_unused_configs = true
